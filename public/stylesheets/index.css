@@ -1,0 +1,19 @@
+.jumbotron{
+  height: 100vh;
+  background-color: #fff;
+  display: none;
+}
+
+.begin-btn{
+  background-color: #4794cc;
+  color: white !important;
+}
+
+.card{
+  box-shadow:6px 6px 21px;
+}
+
+
+.signup-form{
+  display: inline;
+}

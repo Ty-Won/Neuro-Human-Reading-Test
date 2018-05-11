@@ -41,13 +41,12 @@ app.use(function(err, req, res, next) {
 module.exports = app;
 
 
-var http= require("http");
-var dateTest= require("./node_modules/myModule");
 
-http.createServer(function(request,response){
-    response.writeHead(200,{'Content-Type':'text/plain'});
-    response.write(dateTest.myDateTime());
-    response.end('Hello World\n');
-}).listen(8000);
+var bodyParser = require("body-parser");
 
-console.log("RUNNING ON 8000");
+app.use(bodyParser.urlencoded({extended:false}));
+app.get("/", function(req, res) { res.render("index") });
+
+app.listen(8000, function(){
+  console.log("Running on local host 8000");
+});
