@@ -9,3 +9,26 @@
 .navbar{
     outline:1px solid black;
 }
+
+canvas{
+    display: block;
+    margin: 1em auto;
+    width: 90%;
+    height: 90%;
+}
+
+#simulationLetter{
+    display: none;
+}
+
+#colorAssociation{
+    margin: auto 0em;
+    display: none;
+}
+
+li {
+    color: red; /* bullet color */
+}
+li span {
+    color: black; /* text color */
+}

@@ -3,6 +3,10 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var bodyParser = require("body-parser");
+var mongo=require('mongodb');
+var mongoose=require('mongoose');
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -38,14 +42,10 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+
+
+
 module.exports = app;
-
-
-
-var bodyParser = require("body-parser");
-
-app.use(bodyParser.urlencoded({extended:false}));
-app.get("/", function(req, res) { res.render("index") });
 
 app.listen(8000, function(){
   console.log("Running on local host 8000");

@@ -1,6 +1,6 @@
 .jumbotron{
   height: 100vh;
-  background-color: #fff;
+  background: url("../images/mcgill.jpg");
   display: none;
 }
 

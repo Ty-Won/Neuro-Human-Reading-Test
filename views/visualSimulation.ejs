@@ -13,36 +13,75 @@
             crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
             integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
-            crossorigin="anonymous"></script>test images
+            crossorigin="anonymous"></script>
     <link rel='stylesheet' type="text/css" href='/stylesheets/simulation.css'/>
-    <script src="/javascripts/simulation.js"></script>
+
 </head>
 
 <body>
 
-<div class="row text-center">
+
+<div class="row" id="dotSimulation">
+    <div class="col-md-12">
+        <canvas id="simulation"></canvas>
+    </div>
+</div>
+
+
+<div class="row text-center" id="simulationLetter">
     <div class="col"></div>
+
     <div class="card col-md-2">
-        <img class="card-img-top" src="https://www.wilko.com/content/ebiz/wilkinsonplus/invt/0344505/0344505_l.jpg" alt="choice">
+        <img class="card-img-top" src="https://www.wilko.com/content/ebiz/wilkinsonplus/invt/0344505/0344505_l.jpg"
+             alt="choice">
         <div class="card-body">
-            <button type="button" class="btn btn-primary">Select</button>
+            <button type="button" id="1" onclick="selectChar(this.id)" class="btn btn-primary">Select</button>
         </div>
     </div>
 
     <div class="col-md-2"></div>
 
     <div class="card col-md-2">
-        <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Letter_b.svg/2000px-Letter_b.svg.png" alt="choice">
+        <img class="card-img-top"
+             src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Letter_b.svg/2000px-Letter_b.svg.png"
+             alt="choice">
         <div class="card-body">
-            <button type="button" class="btn btn-primary">Select</button>
+            <button type="button" id="2" onclick="selectChar(this.id)" class="btn btn-primary">Select</button>
         </div>
     </div>
+
     <div class="col"></div>
+
 
 </div>
 
+
+<div class="row text-center" id="colorAssociation">
+    <div class="col">
+        <fieldset class="form-group">
+            <legend>Select the color you associate with</legend>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1"
+                           value="option1">
+                    Blue
+                </label>
+            </div>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2"
+                           value="option2">
+                    Red
+                </label>
+            </div>
+        </fieldset>
+    </div>
+
+</div>
+
+
 <nav class="navbar fixed-bottom navbar-light bg-light justify-content-between">
-    <a class="navbar-brand">Neuro</a>
+    <a class="navbar-brand">TEST</a>
     <form class="form-inline">
         <button class="btn navbar-btn btn-outline-success" type="submit">Save</button>
 
@@ -50,6 +89,7 @@
     </form>
 </nav>
 
+<script src="/javascripts/simulation.js"></script>
 
 </body>
 </html>
