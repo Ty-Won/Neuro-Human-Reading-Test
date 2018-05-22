@@ -14,6 +14,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
             integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
             crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+          integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <link rel='stylesheet' type="text/css" href='/stylesheets/simulation.css'/>
 
 </head>
@@ -23,7 +25,7 @@
 
 <div class="row" id="dotSimulation">
     <div class="col-md-12">
-        <canvas id="simulation"></canvas>
+        <canvas id="simulation" height="698px" width="1398px"></canvas>
     </div>
 </div>
 
@@ -31,22 +33,22 @@
 <div class="row text-center" id="simulationLetter">
     <div class="col"></div>
 
-    <div class="card col-md-2">
+    <div class="card col-md-2 letter-container" id="letterOne">
         <img class="card-img-top" src="https://www.wilko.com/content/ebiz/wilkinsonplus/invt/0344505/0344505_l.jpg"
              alt="choice">
         <div class="card-body">
-            <button type="button" id="1" onclick="selectChar(this.id)" class="btn btn-primary">Select</button>
+            <!--<button type="button" id="1" onclick="selectChar(this.id)" class="btn btn-primary">Select</button>-->
         </div>
     </div>
 
-    <div class="col-md-2"></div>
+    <div class="col-md-1"></div>
 
-    <div class="card col-md-2">
+    <div class="card col-md-2 letter-container" id="letterTwo">
         <img class="card-img-top"
              src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Letter_b.svg/2000px-Letter_b.svg.png"
              alt="choice">
         <div class="card-body">
-            <button type="button" id="2" onclick="selectChar(this.id)" class="btn btn-primary">Select</button>
+            <!--<button type="button" id="2" onclick="selectChar(this.id)" class="btn btn-primary">Select</button>-->
         </div>
     </div>
 
@@ -57,21 +59,25 @@
 
 
 <div class="row text-center" id="colorAssociation">
-    <div class="col">
+    <div class="col color-container">
         <fieldset class="form-group">
             <legend>Select the color you associate with</legend>
             <div class="form-check">
                 <label class="form-check-label">
-                    <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1"
-                           value="option1">
-                    Blue
+                    <span class="dot" style="background-color: blue;"></span>
+                    <button class="color-choice" name="optionsRadios" id="optionsRadios1"
+                            value="option1">
+                        Blue
+                    </button>
                 </label>
             </div>
             <div class="form-check">
                 <label class="form-check-label">
-                    <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2"
-                           value="option2">
-                    Red
+                    <span class="dot" style="background-color: red;"></span>
+                    <button class="color-choice" name="optionsRadios" id="optionsRadios2"
+                            value="option2">
+                        Red
+                    </button>
                 </label>
             </div>
         </fieldset>

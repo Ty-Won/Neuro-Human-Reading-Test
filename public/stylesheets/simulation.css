@@ -1,5 +1,23 @@
+html, body {margin: 0; height: 100%; overflow: hidden}
 .card{
     width: 10rem;
+    margin: auto;
+    transition:1s;
+}
+
+.card:hover{
+    box-shadow: 5px 5px 20px 8px;
+    top:-0.5em;
+}
+
+.dot {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    display: inline-block;
+}
+.letter-container{
+    outline:solid;
 }
 
 .navbar-btn{
@@ -13,17 +31,26 @@
 canvas{
     display: block;
     margin: 1em auto;
-    width: 90%;
-    height: 90%;
 }
 
 #simulationLetter{
     display: none;
+    height: 100vh;
 }
 
 #colorAssociation{
-    margin: auto 0em;
+    margin: auto 0;
     display: none;
+
+}
+
+.color-choice{
+    display: inline;
+}
+
+.color-container{
+    position: absolute;
+    top: 40%;
 }
 
 li {

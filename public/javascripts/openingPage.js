@@ -16,18 +16,18 @@ $(document).ready(function () {
         }
     )
 });
-
-
-function signIn(){
-    return true;
-}
-
-function signUp(){
-    $.ajax({
-        method: "GET",
-        url: "/test"
-    })
-}
+//
+//
+// function signIn(){
+//     return true;
+// }
+//
+// function signUp(){
+//     $.ajax({
+//         method: "GET",
+//         url: "/test"
+//     })
+// }
 
 // function retrieveProfile(){
 //

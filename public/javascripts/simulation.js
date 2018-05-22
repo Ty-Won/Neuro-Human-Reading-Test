@@ -1,69 +1,82 @@
-var choices=[];
-
+var choices = [];
+var simulationStage = 1;
 /**
  * variable simulationStage indicates what part we must display
- * 0-Generate dot
  * 1-Display letters
  * 2-Display dot again
  * 3-Option Red or blue
+ * 4-Generate dot
  * @type {number}
  */
 
-var simulationStage=0;
-
-
-
-$(document).ready(function(){
-
-    var simulationStage=0;
-    $(window).keydown(function(key){
-        if(simulationStage===0 || simulationStage===2){
-            $("#simulationLetter").css("display","none");
-            $("#colorAssociation").css("display","none");
-            generateDot();
-            $("#dotSimulation").css("display","block");
-            if(simulationStage===0){
-                simulationStage=1;
-            }
-            else{
-                simulationStage=3;
-            }
-        }
-        else if(simulationStage===1){
-            $("#dotSimulation").css("display","none");
-            $("#simulationLetter").css("display","flex");
-            simulationStage=2;
-        }else if(simulationStage===3){
-            $("#dotSimulation").css("display","none");
-            $("#simulationLetter").css("display","none");
-            $("#colorAssociation").css("display","block");
-            simulationStage=0;
-        }
-
+$(document).ready(function () {
+    $("#simulationLetter").css("display", "none");
+    $("#colorAssociation").css("display", "none");
+    generateDot(false);
+    $(window).keydown(function (key) {
+        nextSimulation(key.keyCode);
     })
 });
 
 
+function nextSimulation(key) {
 
-function generateDot(){
-    var canvas= $("canvas")[0];
-    var canvasHeight=canvas.height;
-    var canvasWidth=canvas.width;
+    if (simulationStage === 1) {
+        $("#dotSimulation").css("display", "none");
+        $("#simulationLetter").css("display", "flex");
+        simulationStage = 2;
+    } else if (simulationStage === 2 && (key === 37 || key === 39)) { //37 is left arrow key and 39 is right
+        generateDot(true);
+        $("#dotSimulation").css("display", "block");
+        simulationStage = 3;
+        choices.push(key);
+    }
+    else if (simulationStage === 3) {
+        simulationStage = 4;
+        $("#simulationLetter").css("display", "none");
+        $("#dotSimulation").css("display", "none");
+        $("#colorAssociation").css("display", "flex");
+        generateDot(false);
+
+    }
+    else if (simulationStage === 4 && (key === 38 || key === 40)) { //38 is up and 40 is down
+        simulationStage = 1;
+        $("#simulationLetter").css("display", "none");
+        $("#colorAssociation").css("display", "none");
+        $("#dotSimulation").css("display", "block");
+        choices.push(key);
+    }
+
+
+}
+
+
+function generateDot(rightSide) {
+    var canvas = $("canvas")[0];
+    var canvasHeight = canvas.height;
+    var canvasWidth = canvas.width;
     var ctx = canvas.getContext("2d");
-    ctx.clearRect(0,0,canvasWidth,canvasHeight);
-    ctx.fillStyle="#000000";
+    var height = canvasHeight / 2;
+    var width;
 
-    var height =canvasHeight*Math.random();
-    var width =canvasWidth*Math.random();
-    // console.log(height);
-    // console.log(width);
-    ctx.fillRect(width,height,2,2);
+    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+    ctx.fillStyle = "#000000";
+    ctx.imageSmoothingEnabled = false;
+
+    if (rightSide) {
+        width = canvasWidth * (3 / 4);
+    }
+    else {
+        width = canvasWidth / 4;
+    }
+
+    ctx.fillRect(width, height, 5, 5);
 
 }
 
 
-function selectChar(id){
+function selectChar(id) {
     choices.push(id);
-    $("#simulationCanvas").html("<div>Blue</div>");
 }
+
 
