@@ -44,13 +44,19 @@ canvas{
 
 }
 
+#dotSimulation{
+    height: 90%;
+}
+
+
 .color-choice{
     display: inline;
 }
 
-.color-container{
+#color-container{
     position: absolute;
     top: 40%;
+    left:10%;
 }
 
 li {

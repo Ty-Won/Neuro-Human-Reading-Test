@@ -23,9 +23,10 @@
 <body>
 
 
+
 <div class="row" id="dotSimulation">
-    <div class="col-md-12">
-        <canvas id="simulation" height="698px" width="1398px"></canvas>
+    <div class="col-md-12" ontouchstart="touchOption(null)" id="canvasContainer">
+        <canvas id="dotCanvas">Your Browser does not Support Canvas Elements</canvas>
     </div>
 </div>
 
@@ -33,8 +34,8 @@
 <div class="row text-center" id="simulationLetter">
     <div class="col"></div>
 
-    <div class="card col-md-2 letter-container" id="letterOne">
-        <img class="card-img-top" src="https://www.wilko.com/content/ebiz/wilkinsonplus/invt/0344505/0344505_l.jpg"
+    <div class="card col-md-2 letter-container" id="letterOne" ontouchstart="touchOption(this.id)">
+        <img class="card-img-top" src="/images/svg/Letter_A.svg"
              alt="choice">
         <div class="card-body">
             <!--<button type="button" id="1" onclick="selectChar(this.id)" class="btn btn-primary">Select</button>-->
@@ -43,9 +44,9 @@
 
     <div class="col-md-1"></div>
 
-    <div class="card col-md-2 letter-container" id="letterTwo">
+    <div class="card col-md-2 letter-container" id="letterTwo" ontouchstart="touchOption(this.id)">
         <img class="card-img-top"
-             src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Letter_b.svg/2000px-Letter_b.svg.png"
+             src="/images/svg/Letter_B.svg"
              alt="choice">
         <div class="card-body">
             <!--<button type="button" id="2" onclick="selectChar(this.id)" class="btn btn-primary">Select</button>-->
@@ -58,15 +59,15 @@
 </div>
 
 
-<div class="row text-center" id="colorAssociation">
-    <div class="col color-container">
+<div class="row" id="colorAssociation">
+    <div class="col" id="color-container">
         <fieldset class="form-group">
             <legend>Select the color you associate with</legend>
             <div class="form-check">
                 <label class="form-check-label">
                     <span class="dot" style="background-color: blue;"></span>
-                    <button class="color-choice" name="optionsRadios" id="optionsRadios1"
-                            value="option1">
+                    <button class="color-choice" name="optionsRadios" id="colorOptionOne" value="option1"
+                            ontouchstart="touchOption(this.id)">
                         Blue
                     </button>
                 </label>
@@ -74,8 +75,8 @@
             <div class="form-check">
                 <label class="form-check-label">
                     <span class="dot" style="background-color: red;"></span>
-                    <button class="color-choice" name="optionsRadios" id="optionsRadios2"
-                            value="option2">
+                    <button class="color-choice" name="optionsRadios" id="colorOptionTwo" value="option2"
+                            ontouchstart="touchOption(this.id)">
                         Red
                     </button>
                 </label>
@@ -88,11 +89,11 @@
 
 <nav class="navbar fixed-bottom navbar-light bg-light justify-content-between">
     <a class="navbar-brand">TEST</a>
-    <form class="form-inline">
+    <div class="form-inline">
         <button class="btn navbar-btn btn-outline-success" type="submit">Save</button>
 
-        <button class="btn navbar-btn btn-outline-success" type="submit">Submit</button>
-    </form>
+        <button class="btn navbar-btn btn-outline-success" onclick="submit()">Submit</button>
+    </div>
 </nav>
 
 <script src="/javascripts/simulation.js"></script>

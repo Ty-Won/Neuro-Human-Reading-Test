@@ -1,3 +1,4 @@
 ## Ignore node modules and jetbrain idea files
 node_modules
 .idea
+todoList

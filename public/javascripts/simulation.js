@@ -12,6 +12,10 @@ var simulationStage = 1;
 $(document).ready(function () {
     $("#simulationLetter").css("display", "none");
     $("#colorAssociation").css("display", "none");
+
+        var canvas = document.getElementById("dotCanvas");
+        canvas.width = $("#canvasContainer").width();
+        canvas.height = $("#canvasContainer").height();
     generateDot(false);
     $(window).keydown(function (key) {
         nextSimulation(key.keyCode);
@@ -56,27 +60,66 @@ function generateDot(rightSide) {
     var canvasHeight = canvas.height;
     var canvasWidth = canvas.width;
     var ctx = canvas.getContext("2d");
-    var height = canvasHeight / 2;
-    var width;
+    var y = canvasHeight / 2;
+    var x;
 
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
     ctx.fillStyle = "#000000";
     ctx.imageSmoothingEnabled = false;
 
     if (rightSide) {
-        width = canvasWidth * (3 / 4);
+        x = canvasWidth * (3 / 4);
     }
     else {
-        width = canvasWidth / 4;
+        x = canvasWidth / 4;
     }
 
-    ctx.fillRect(width, height, 5, 5);
-
+    ctx.fillRect(x, y, 5, 5);
 }
 
 
-function selectChar(id) {
-    choices.push(id);
+function touchOption(choice){
+    if (simulationStage === 1) {
+        $("#dotSimulation").css("display", "none");
+        $("#simulationLetter").css("display", "flex");
+        simulationStage = 2;
+    } else if (simulationStage === 2) {
+        generateDot(true);
+        $("#dotSimulation").css("display", "block");
+        simulationStage = 3;
+        choices.push(choice);
+    }
+    else if (simulationStage === 3) {
+        simulationStage = 4;
+        $("#simulationLetter").css("display", "none");
+        $("#dotSimulation").css("display", "none");
+        $("#colorAssociation").css("display", "flex");
+        generateDot(false);
+
+    }
+    else if (simulationStage === 4) {
+        simulationStage = 1;
+        $("#simulationLetter").css("display", "none");
+        $("#colorAssociation").css("display", "none");
+        $("#dotSimulation").css("display", "block");
+        choices.push(choice);
+    }
 }
 
 
+function submit(){
+    console.log("lol");
+    $.ajax({
+        method: "POST",
+        url:"/simulation",
+        data:choices,
+        success:function(result){
+            alert("WORKS");
+        },
+        error:function(result){
+            alert("Back to work bud");
+        }
+
+    });
+
+}
