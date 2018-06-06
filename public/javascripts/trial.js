@@ -1,7 +1,7 @@
 var choices = [];
-var simulationStage = 1;
+var trialStage = 1;
 /**
- * variable simulationStage indicates what part we must display
+ * variable trialStage indicates what part we must display
  * 1-Display letters
  * 2-Display dot again
  * 3-Option Red or blue
@@ -10,7 +10,7 @@ var simulationStage = 1;
  */
 
 $(document).ready(function () {
-    $("#simulationLetter").css("display", "none");
+    $("#trialLetter").css("display", "none");
     $("#colorAssociation").css("display", "none");
 
         var canvas = document.getElementById("dotCanvas");
@@ -18,36 +18,36 @@ $(document).ready(function () {
         canvas.height = $("#canvasContainer").height();
     generateDot(false);
     $(window).keydown(function (key) {
-        nextSimulation(key.keyCode);
+        nextTrial(key.keyCode);
     })
 });
 
 
-function nextSimulation(key) {
+function nextTrial(key) {
 
     if (simulationStage === 1) {
-        $("#dotSimulation").css("display", "none");
-        $("#simulationLetter").css("display", "flex");
-        simulationStage = 2;
-    } else if (simulationStage === 2 && (key === 37 || key === 39)) { //37 is left arrow key and 39 is right
+        $("#dotTrial").css("display", "none");
+        $("#trialLetter").css("display", "flex");
+        trialStage = 2;
+    } else if (trialStage === 2 && (key === 37 || key === 39)) { //37 is left arrow key and 39 is right
         generateDot(true);
-        $("#dotSimulation").css("display", "block");
-        simulationStage = 3;
+        $("#dotTrial").css("display", "block");
+        trialStage = 3;
         choices.push(key);
     }
-    else if (simulationStage === 3) {
-        simulationStage = 4;
-        $("#simulationLetter").css("display", "none");
-        $("#dotSimulation").css("display", "none");
+    else if (trialStage === 3) {
+        trialStage = 4;
+        $("#trialLetter").css("display", "none");
+        $("#dotTrial").css("display", "none");
         $("#colorAssociation").css("display", "flex");
         generateDot(false);
 
     }
-    else if (simulationStage === 4 && (key === 38 || key === 40)) { //38 is up and 40 is down
-        simulationStage = 1;
-        $("#simulationLetter").css("display", "none");
+    else if (trialStage === 4 && (key === 38 || key === 40)) { //38 is up and 40 is down
+        trialStage = 1;
+        $("#trialLetter").css("display", "none");
         $("#colorAssociation").css("display", "none");
-        $("#dotSimulation").css("display", "block");
+        $("#dotTrial").css("display", "block");
         choices.push(key);
     }
 
@@ -79,29 +79,29 @@ function generateDot(rightSide) {
 
 
 function touchOption(choice){
-    if (simulationStage === 1) {
-        $("#dotSimulation").css("display", "none");
-        $("#simulationLetter").css("display", "flex");
-        simulationStage = 2;
-    } else if (simulationStage === 2) {
+    if (trialStage === 1) {
+        $("#dotTrial").css("display", "none");
+        $("#trialLetter").css("display", "flex");
+        trialStage = 2;
+    } else if (trialStage === 2) {
         generateDot(true);
-        $("#dotSimulation").css("display", "block");
-        simulationStage = 3;
+        $("#dotTrial").css("display", "block");
+        trialStage = 3;
         choices.push(choice);
     }
-    else if (simulationStage === 3) {
-        simulationStage = 4;
-        $("#simulationLetter").css("display", "none");
-        $("#dotSimulation").css("display", "none");
+    else if (trialStage === 3) {
+        trialStage = 4;
+        $("#trialLetter").css("display", "none");
+        $("#dotTrial").css("display", "none");
         $("#colorAssociation").css("display", "flex");
         generateDot(false);
 
     }
-    else if (simulationStage === 4) {
-        simulationStage = 1;
-        $("#simulationLetter").css("display", "none");
+    else if (trialStage === 4) {
+        trialStage = 1;
+        $("#trialLetter").css("display", "none");
         $("#colorAssociation").css("display", "none");
-        $("#dotSimulation").css("display", "block");
+        $("#dotTrial").css("display", "block");
         choices.push(choice);
     }
 }
@@ -111,7 +111,7 @@ function submit(){
     console.log("lol");
     $.ajax({
         method: "POST",
-        url:"/simulation",
+        url:"/trial",
         data:choices,
         success:function(result){
             alert("WORKS");

@@ -33,7 +33,7 @@ canvas{
     margin: 1em auto;
 }
 
-#simulationLetter{
+#trialLetter{
     display: none;
     height: 100vh;
 }
@@ -44,7 +44,7 @@ canvas{
 
 }
 
-#dotSimulation{
+#dotTrial{
     height: 90%;
 }
 
