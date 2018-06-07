@@ -13,7 +13,7 @@ router.get('/', function (req, res, next) {
     res.render('index', {title: 'Express'});
 });
 
-
+/*
 router.post('/signIn', function (req, res) {
     var data = new User(req.body);
 
@@ -32,6 +32,33 @@ router.post('/signIn', function (req, res) {
     });
 
 });
+*/
+
+router.post('/signIn', function (req, res) {
+    var data = new User(req.body);
+
+    User.findOne({email: new RegExp('^' + data.email + '$')}, function (err, User) {
+        if (err) {
+            console.log("Error");
+        }
+        else if (User) {
+            // Compare entered password with retrieved hash
+            bcrypt.compare(req.body.password, User.password, function(err, res) {
+                if (res) {
+                    console.log("Password match");
+                } else {
+                    console.log("Wrong password");
+                }
+            });
+            res.redirect("../trial");
+        }
+        else {
+            console.log("Unsuccessful Sign-in");
+        }
+    });
+
+});
+
 
 
 router.post('/signUp', function (req, res) {
