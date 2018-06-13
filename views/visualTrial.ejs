@@ -22,6 +22,10 @@
 
 <body>
 
+<script>
+    var run = <%- JSON.stringify(Trial) %>;
+    var selectedRun = <%= runSelection %>;
+</script>
 
 
 <div class="row" id="dotTrial">
@@ -31,54 +35,30 @@
 </div>
 
 
-<div class="row text-center" id="trialLetter">
-    <div class="col"></div>
-
-    <div class="card col-md-2 letter-container" id="letterOne" ontouchstart="touchOption(this.id)">
-        <img class="card-img-top" src="/images/svg/Letter_A.svg"
-             alt="choice">
-        <div class="card-body">
-            <!--<button type="button" id="1" onclick="selectChar(this.id)" class="btn btn-primary">Select</button>-->
-        </div>
-    </div>
-
-    <div class="col-md-1"></div>
-
-    <div class="card col-md-2 letter-container" id="letterTwo" ontouchstart="touchOption(this.id)">
-        <img class="card-img-top"
-             src="/images/svg/Letter_B.svg"
-             alt="choice">
-        <div class="card-body">
-            <!--<button type="button" id="2" onclick="selectChar(this.id)" class="btn btn-primary">Select</button>-->
-        </div>
-    </div>
-
-    <div class="col"></div>
-
-
+<div class="row text-center" id="trialCharacter">
+        <%- include partials/trial/characterPartial.ejs%>
 </div>
 
 
 <div class="row" id="colorAssociation">
     <div class="col" id="color-container">
         <fieldset class="form-group">
-            <legend>Select the color you associate with</legend>
             <div class="form-check">
                 <label class="form-check-label">
                     <span class="dot" style="background-color: blue;"></span>
-                    <button class="color-choice" name="optionsRadios" id="colorOptionOne" value="option1"
-                            ontouchstart="touchOption(this.id)">
-                        Blue
-                    </button>
+                    <!--<button class="color-choice" name="optionsRadios" id="colorOptionOne" value="option1"-->
+                            <!--ontouchstart="touchOption(this.id)">-->
+
+                    <!--</button>-->
                 </label>
             </div>
             <div class="form-check">
                 <label class="form-check-label">
                     <span class="dot" style="background-color: red;"></span>
-                    <button class="color-choice" name="optionsRadios" id="colorOptionTwo" value="option2"
-                            ontouchstart="touchOption(this.id)">
-                        Red
-                    </button>
+                    <!--<button class="color-choice" name="optionsRadios" id="colorOptionTwo" value="option2"-->
+                            <!--ontouchstart="toggleRun()">-->
+
+                    <!--</button>-->
                 </label>
             </div>
         </fieldset>
@@ -88,15 +68,13 @@
 
 
 <nav class="navbar fixed-bottom navbar-light bg-light justify-content-between">
-    <a class="navbar-brand">TEST</a>
+    <a class="navbar-brand"> Welcome <%= User %></a>
     <div class="form-inline">
-        <button class="btn navbar-btn btn-outline-success" type="submit">Save</button>
-
-        <button class="btn navbar-btn btn-outline-success" onclick="submit()">Submit</button>
+        <button class="btn navbar-btn btn-outline-success" onclick="save()">Save</button>
     </div>
 </nav>
 
-<script src="/javascripts/trial.js"></script>
+<script src="/javascripts/trialLogic.js"></script>
 
 </body>
 </html>
