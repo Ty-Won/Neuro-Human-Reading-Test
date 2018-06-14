@@ -27,7 +27,7 @@ router.put('/:id/save',function(req,res){
             console.log("An error occurred while saving the current trial session"+err);
         }
         else if(userFound){
-            userFound.run=req.body.run;
+            userFound.session=req.body;
             userFound.save(function(err,updatedUser){
                 if(err){
                     console.log("An error occured while saving the new run data to the current user session"+err);
@@ -48,7 +48,7 @@ router.put("/:id/submit",function(req,res){
             console.log("An error occurred while finding the current user to submit under"+err);
         }
         else if(userFound){
-            userFound.run=req.body.run;
+            userFound.session=req.body;
             userFound.save(function(err,submitUser){
                 if(err){
                     console.log("An error occurred while submitting for the current user session"+err);

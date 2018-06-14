@@ -18,6 +18,7 @@
 
 </head>
 <body>
+
 <div class="text-center">
     <div class="jumbotron jumbotron-fluid">
         <div class="container container-fluid">
@@ -28,9 +29,7 @@
                     <img class="card-img-top" src="/images/neuroLogo.jpg" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title">Neuro Human Reading Test</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's
-                            content.</p>
+                        <p class="card-text">Test Description</p>
                         <button class="btn begin-btn" data-toggle="modal"
                                 data-target="#signup-modal" data-type="sign-up">
                             Sign Up
@@ -61,6 +60,10 @@
         </div>
     </div>
 
+    <div id="modal-loading-container">
+    <%- include partials/index/signInModal.ejs%>
+    <%- include partials/index/signUpModal.ejs%>
+    </div>
 
 </div>
 

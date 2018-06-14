@@ -1,12 +1,11 @@
 var trialStage = 1;
-var currentRun=selectedRun;
-var currentBlock=run[currentRun].blocks.length-1;
-var currentTrial=run[currentRun].blocks[currentBlock].trials.length-1;
-var numberOfBlocks=3;
-var numberTrials=5;
+var currentRun = selectedRun;
+var currentBlock = run[currentRun].blocks.length - 1;
+var currentTrial = run[currentRun].blocks[currentBlock].trials.length - 1;
+var numberOfBlocks = 3;
+var numberTrials = 5;
 var characterVariation;
-var blockSchema={"trials":[{"character":null,"color":null}]};
-var trialSchema={"character":null,"color":null};
+
 
 /**
  * variable trialStage indicates what part we must display
@@ -20,46 +19,54 @@ var trialSchema={"character":null,"color":null};
 $(document).ready(function () {
     $("#trialCharacter").css("display", "none");
     $("#colorAssociation").css("display", "none");
-    characterVariation=characterToDisplay();
+    characterVariation = characterToDisplay();
 
     var canvas = document.getElementById("dotCanvas");
     canvas.width = $("#canvasContainer").width();
     canvas.height = $("#canvasContainer").height();
 
+    $("#run-modal").modal('show');
 
-    generateDot(false);
-    $(window).keydown(function (key) {
-        nextTrial(key.keyCode);
-    })
+    $("#begin-trial").click(function(){
+        $("#run-modal").modal('hide');
+        generateDot(false);
+        $(window).keydown(function (key) {
+            nextTrial(key.keyCode);
+        });
+    });
+
+
 });
 
 
 function nextTrial(key) {
+    var blockSchema = {"trials": [{"color": null}]};
+    var trialSchema = {"color": null};
 
     //-1 is due to index starting at 0
-    if(currentTrial>=numberTrials-1){
-        currentTrial=0;
-        run.push(blockSchema);
+    if (currentTrial > numberTrials - 1) {
+        currentTrial = 0;
+        run[selectedRun].blocks.push(blockSchema);
         currentBlock++;
-        characterVariation=characterToDisplay();
+        characterVariation = characterToDisplay();
     }
 
-    if(currentBlock>=numberOfBlocks-1){
+    if (currentBlock >= numberOfBlocks - 1) {
         submitRun();
     }
 
     //show numbers
-    if (trialStage === 1) {
+    if (trialStage === 1 && key === 39) {
         $("#dotTrial").css("display", "none");
         generateCharacter(characterVariation);
         $("#trialCharacter").css("display", "flex");
         trialStage = 2;
-    } else if (trialStage === 2 && (key === 37 || key === 39)) { //37 is left arrow key and 39 is right
+    } else if (trialStage === 2 && key === 39) { //37 is left arrow key and 39 is right
         generateDot(true);
         $("#dotTrial").css("display", "block");
         trialStage = 3;
     }
-    else if (trialStage === 3) {
+    else if (trialStage === 3 && key === 39) {
         trialStage = 4;
         $("#trialCharacter").css("display", "none");
         $("#dotTrial").css("display", "none");
@@ -68,18 +75,21 @@ function nextTrial(key) {
 
     }
     else if (trialStage === 4 && (key === 38 || key === 40)) { //38 is up and 40 is down
-        trialStage = 1;
-        $("#trialCharacter").css("display", "none");
-        $("#colorAssociation").css("display", "none");
-        $("#dotTrial").css("display", "block");
-        run[currentRun].blocks[currentBlock].trials[currentTrial].color=key;
+        trialStage = 5;
+        feedback("#color-one","#color-two",true);
+        run[currentRun].blocks[currentBlock].trials[currentTrial].color = key;
         run[currentRun].blocks[currentBlock].trials.push(trialSchema);
         currentTrial++;
+    }
+    else if (trialStage === 5) {
+        trialStage = 1;
+        $("#colorAssociation").css("display", "none");
+        $("#dotTrial").css("display", "block");
+        feedback("#color-one","#color-two",false);
     }
 
 
 }
-
 
 
 function touchOption(choice) {
@@ -111,7 +121,6 @@ function touchOption(choice) {
 }
 
 
-
 function generateDot(rightSide) {
     var canvas = $("canvas")[0];
     var canvasHeight = canvas.height;
@@ -134,44 +143,44 @@ function generateDot(rightSide) {
     ctx.fillRect(x, y, 5, 5);
 }
 
-function generateCharacter(numChar){
-    var charElement=$(".character-container")[0];
+function generateCharacter(numChar) {
+    var charElement = $(".character-container")[0];
     var character;
     $("#trialCharacter").html("");
-    for(var char=0;char<=numChar;char++){
-        character=characterToDisplay();
-        $(charElement).attr("id","charID"+char);
+    for (var char = 0; char <= numChar; char++) {
+        character = characterToDisplay();
+        $(charElement).attr("id", "charID" + char);
         $("#trialCharacter").append($(charElement).clone());
-        $("#charID"+char+">img").attr("src","../images/svg/"+character+".svg")
+        $("#charID" + char + ">img").attr("src", "../images/svg/" + character + ".svg")
 
     }
 
 }
 
 
-
 function submitRun() {
     var f = document.createElement("form");
-    f.setAttribute('method',"post");
-    f.setAttribute('id',"run-form");
-    f.setAttribute('action',"/submit");
+    f.setAttribute('method', "post");
+    f.setAttribute('id', "run-form");
+    f.setAttribute('action', "/submit");
 
     var i = document.createElement("input"); //input element, text
-    i.setAttribute('type',"text");
-    i.setAttribute('name',"run");
+    i.setAttribute('type', "text");
+    i.setAttribute('name', "run");
 
     f.appendChild(i);
     $("body").append(f);
     f.submit()
 }
 
-function save(){
-    console.log(run);
+function save() {
+    var data = {'firstName': "HI"};
     //the data run is defined within the visualTrial.ejs template under the script tag
     $.ajax({
         method: "PUT",
         url: window.location.pathname + "/save",
-        data: run,
+        data: JSON.stringify(data),
+        // dataType:"json",
         success: function (response) {
 
             window.location.href = response.redirect;
@@ -181,9 +190,27 @@ function save(){
 }
 
 
-function characterToDisplay(){
-    return Math.floor(1+(10-1)*Math.random());
+function characterToDisplay() {
+    return Math.floor(1 + (10 - 1) * Math.random());
 }
+
+
+function feedback(colorOne, colorTwo, display) {
+    var topicChoice=Math.random()*2;
+
+    if(!display){
+        $(colorOne).css("border","none");
+        $(colorTwo).css("border","none");
+    }
+    else if(topicChoice>1){
+        $(colorOne).css("border","0.3em solid #00ff00");
+    }
+    else{
+        $(colorTwo).css("border","0.3em solid #00ff00");
+    }
+
+}
+
 // function signUp(){
 //
 //     var data={

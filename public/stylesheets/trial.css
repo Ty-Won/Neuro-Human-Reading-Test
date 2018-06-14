@@ -11,12 +11,25 @@ html, body {margin: 0; height: 100%; overflow: hidden}
 }
 
 .dot {
-    height: 25px;
-    width: 25px;
+    height: 2em;
+    width: 2em;
     border-radius: 50%;
     display: inline-block;
 }
 
+#color-one{
+    background-color: blue;
+}
+
+#color-two{
+    background-color: red;
+}
+.modal-header{
+    margin:auto;
+}
+.modal-footer{
+    justify-content: center;
+}
 
 .navbar-btn{
     margin:0.5em;
@@ -54,7 +67,7 @@ canvas{
 #color-container{
     position: absolute;
     top: 40%;
-    left:10%;
+    left:75%;
 }
 #run-form{
     display: none;

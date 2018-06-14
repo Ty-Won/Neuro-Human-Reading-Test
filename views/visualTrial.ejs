@@ -27,6 +27,24 @@
     var selectedRun = <%= runSelection %>;
 </script>
 
+<div class="modal fade" id="run-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Run <%=runSelection+1%></h5>
+            </div>
+            <div class="modal-body">
+                To proceed through the trial, use the right arrow key to navigate. Once a colored dot appears, use the
+                up and down arrow keys to select the color you associate yourself with and then continue to proceed with
+                the right arrow key.
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="begin-trial" class="btn btn-primary">Begin</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <div class="row" id="dotTrial">
     <div class="col-md-12" ontouchstart="touchOption(null)" id="canvasContainer">
@@ -45,7 +63,7 @@
         <fieldset class="form-group">
             <div class="form-check">
                 <label class="form-check-label">
-                    <span class="dot" style="background-color: blue;"></span>
+                    <span class="dot" id="color-one"></span>
                     <!--<button class="color-choice" name="optionsRadios" id="colorOptionOne" value="option1"-->
                             <!--ontouchstart="touchOption(this.id)">-->
 
@@ -54,7 +72,7 @@
             </div>
             <div class="form-check">
                 <label class="form-check-label">
-                    <span class="dot" style="background-color: red;"></span>
+                    <span class="dot" id="color-two"></span>
                     <!--<button class="color-choice" name="optionsRadios" id="colorOptionTwo" value="option2"-->
                             <!--ontouchstart="toggleRun()">-->
 
