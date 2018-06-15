@@ -6,6 +6,10 @@ var bodyParser = require("body-parser");
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({extended:false}));
 
+
+/**
+ * Receive the userID and render the trial
+ */
 router.get('/:id',function(req,res){
     User.findById(req.params.id,function(err, userFound){
         if(err){
@@ -20,6 +24,11 @@ router.get('/:id',function(req,res){
     });
 });
 
+
+
+/**
+ * Receive an ajax request to save the current trial state under the current userID profile
+ */
 
 router.put('/:id/save',function(req,res){
     User.findById(req.params.id,function(err,userFound){

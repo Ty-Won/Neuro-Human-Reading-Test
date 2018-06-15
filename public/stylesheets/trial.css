@@ -49,6 +49,10 @@ canvas{
     height: 100vh;
 }
 
+.character-container{
+    max-height: 70%;
+}
+
 #colorAssociation{
     margin: auto 0;
     display: none;

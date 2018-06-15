@@ -8,9 +8,8 @@ var mongoose = require('mongoose');
 var helmet = require('helmet');
 
 
-var indexRouter = require('./routes/index');
-var adminRouter = require('./routes/admin');
-var trialRouter = require('./routes/trial');
+
+
 var app = express();
 app.use(helmet());
 
@@ -23,8 +22,13 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-// setup the public folder directory for static files
+// setup the public folder directory for static files (css,js,img)
 app.use(express.static(path.join(__dirname, 'public')));
+
+//Setting up the routes to redirect between pages
+var indexRouter = require('./routes/index');
+var adminRouter = require('./routes/admin');
+var trialRouter = require('./routes/trial');
 app.use('/', indexRouter);
 app.use('/trial', trialRouter);
 app.use('/admin', adminRouter);

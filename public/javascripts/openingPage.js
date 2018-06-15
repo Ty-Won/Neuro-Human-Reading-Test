@@ -1,6 +1,7 @@
 $(document).ready(function () {
     $(".jumbotron").fadeIn(1000);
 
+    //Display either the sign up modal or the sign in
     $('button.begin-btn').click(function () {
             var content;
             if ($(this).attr("data-type") === "sign-up") {

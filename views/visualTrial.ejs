@@ -27,7 +27,7 @@
     var selectedRun = <%= runSelection %>;
 </script>
 
-<div class="modal fade" id="run-modal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="run-modal" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -39,7 +39,7 @@
                 the right arrow key.
             </div>
             <div class="modal-footer">
-                <button type="button" id="begin-trial" class="btn btn-primary">Begin</button>
+                <button type="button" id="begin-trial" class="btn btn-primary" onclick="">Begin</button>
             </div>
         </div>
     </div>
