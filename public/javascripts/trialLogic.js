@@ -2,8 +2,8 @@ var trialStage = 1;
 var currentRun = selectedRun;
 var currentBlock = run[currentRun].blocks.length - 1;
 var currentTrial = run[currentRun].blocks[currentBlock].trials.length - 1;
-var numberOfBlocks = 2;
-var numberTrials = 2;
+var numberOfBlocks = 3;
+var numberTrials = 5;
 var characterVariation;
 
 
@@ -63,7 +63,9 @@ function nextTrial(key) {
     }
 
     //If the number of blocks tested per run is reached, submit the run
-    if (currentBlock === numberOfBlocks - 1) {
+    if (currentBlock > numberOfBlocks - 1) {
+        var newRun={"blocks":[{"trials":[{"color":null}]}]};
+        run.push(newRun);
         submitRun();
     }
 
@@ -223,22 +225,6 @@ function feedback(colorOne, colorTwo, display) {
 
 }
 
-
-function submitRun() {
-    var f = document.createElement("form");
-    f.setAttribute('method', "post");
-    f.setAttribute('id', "run-form");
-    f.setAttribute('action', window.location.pathname+"/submit");
-
-    var i = document.createElement("input"); //input element, text
-    i.setAttribute('type', "text");
-    i.setAttribute('name', "run");
-    i.setAttribute('value', JSON.stringify(run));
-    f.appendChild(i);
-    $("body").append(f);
-    f.submit()
-}
-
 function save() {
     var data = {session:JSON.stringify(run)};
     //the data run is defined within the visualTrial.ejs template under the script tag
@@ -246,10 +232,9 @@ function save() {
         method: "PUT",
         url: window.location.pathname + "/save",
         data: data,
-        // dataType:"json",
         success: function (response) {
-
-            window.location.href = response.redirect;
+            console.log(response.success);
+            alert("Successfully saved");
         }
     })
 
@@ -258,3 +243,17 @@ function save() {
 
 
 
+
+function submitRun() {
+    var data = {session:JSON.stringify(run)};
+    //the data run is defined within the visualTrial.ejs template under the script tag
+    $.ajax({
+        method: "PUT",
+        url: window.location.pathname + "/submit",
+        data: data,
+        success: function (response) {
+            alert(response);
+            window.location.href="/";
+        }
+    });
+}

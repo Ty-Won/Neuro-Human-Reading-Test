@@ -35,6 +35,7 @@ app.use('/admin', adminRouter);
 
 
 //DB connection
+//mlab connecton is "mongodb://<user>:<password>@ds143039.mlab.com:43039/neuro-trial"
 mongoose.connect("mongodb://localhost:27017/tyroneTestDbs");
 mongoose.Promise=global.Promise;
 var db = mongoose.connection;

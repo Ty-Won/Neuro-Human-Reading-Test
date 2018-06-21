@@ -22,7 +22,7 @@ var userSchema = new Schema({
     "password": {type: String, required: true},
     "birthdate": {type: Date, required: true},
     "session": {
-        type: String, default:'[{"blocks":[{"trials":[{"color":null}]}]},{"blocks":[{"trials":[{"color":null}]}]}]'
+        type: String, default:'[{"blocks":[{"trials":[{"color":null}]}]}]'
     }
 
 });
