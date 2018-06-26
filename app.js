@@ -8,8 +8,6 @@ var mongoose = require('mongoose');
 var helmet = require('helmet');
 
 
-
-
 var app = express();
 app.use(helmet());
 
@@ -24,6 +22,8 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 // setup the public folder directory for static files (css,js,img)
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/bootstrap', express.static(path.join(__dirname,'node_modules/bootstrap/dist')));
+app.use('/jquery', express.static(path.join(__dirname,'node_modules/jquery/dist')));
 
 //Setting up the routes to redirect between pages
 var indexRouter = require('./routes/index');
@@ -37,7 +37,7 @@ app.use('/admin', adminRouter);
 //DB connection
 //mlab connecton is "mongodb://<user>:<password>@ds143039.mlab.com:43039/neuro-trial"
 mongoose.connect("mongodb://localhost:27017/tyroneTestDbs");
-mongoose.Promise=global.Promise;
+mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error'));
 db.once('open', function () {

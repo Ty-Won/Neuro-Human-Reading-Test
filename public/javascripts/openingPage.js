@@ -16,6 +16,16 @@ $(document).ready(function () {
         }
     );
 
+    $("#sign-up-pass, #sign-up-pass-verify").keyup(function(){
+        if($("#sign-up-pass").val()==$("#sign-up-pass-verify").val()){
+            $("#pass-message").html("Matching").css("color","green");
+        }
+        else{
+            $("#pass-message").html("Password does not match").css("color","red");
+        }
+    })
+
+
 });
 
 

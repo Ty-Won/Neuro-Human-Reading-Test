@@ -5,8 +5,12 @@ var bcrypt = require('bcrypt');
 var User = require('../models/user');
 
 
+
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({extended: false}));
+
+
+
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -19,21 +23,26 @@ router.get('/', function (req, res, next) {
  */
 router.post('/signIn', function (req, res) {
     var data = new User(req.body);
-
-
     User.findOne({email: new RegExp('^' + data.email + '$')}, function (err, User) {
         if (err) {
-            console.log("Error");
+            console.log("Error Signing In: "+err);
         }
-        else if (User && bcrypt.compare(req.body.password, User.password)) {
+        else if (User) {
+            bcrypt.compare(req.body.password, User.password,function(err,match){
+                if(err){
+                    var response={
+                        status:401
+                    };
+                    console.log("Password Incorrect: "+err);
+                    res.end(JSON.stringify(response));
 
-            res.redirect("/trial/" + User.id);
-
+                }else if(match){
+                    res.redirect("/trial/" + User.id);
+                }
+            });
 
         }
-        else {
-            console.log("Unsuccessful Sign-in");
-        }
+
     });
 
 });
