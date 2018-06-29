@@ -43,7 +43,7 @@ function beginTrial() {
  * Sequence:
  * 1-Generate dot
  * 2-Display Characters
- * 3-Generate another dote
+ * 3-Generate another dot
  * 4-Display color choice
  * 5-Provide feedback on color choice
  *
@@ -88,7 +88,6 @@ function nextTrial(key) {
         $("#dotTrial").css("display", "none");
         $("#colorAssociation").css("display", "flex");
         generateDot(false);
-
     }
     else if (trialStage === 4 && (key === 38 || key === 40)) { //38 is up arrow key and 40 is the down arrow key
         trialStage = 5;
@@ -109,42 +108,76 @@ function nextTrial(key) {
 
 /**
  * The touchOption handles any input from a touchscreen device
- * @param choice
+ * @param choiceId
  */
-function touchOption(choice) {
-    if (trialStage === 1) {
+function touchOption(choiceId) {
+    var blockSchema = {"trials": [{"color": null}]};
+    var trialSchema = {"color": null};
+
+    //If the currentTrial has just surpassed the number of trials per block (-1 is due to index starting at 0),
+    // create a new block and assign a new character display variation to it
+    if (currentTrial > numberTrials-1) {
+        currentTrial = 0;
+        run[selectedRun].blocks.push(blockSchema);
+        currentBlock++;
+        characterVariation = charactersToDisplay();
+    }
+
+    //If the number of blocks tested per run is reached, submit the run
+    if (currentBlock > numberOfBlocks - 1) {
+        var newRun={"blocks":[{"trials":[{"color":null}]}]};
+        run.push(newRun);
+        submitRun();
+    }
+
+    // Generate the dot
+    if (trialStage === 1 && (choiceId === '#dotTrial')) {
         $("#dotTrial").css("display", "none");
+        generateCharacter(characterVariation);
         $("#trialCharacter").css("display", "flex");
         trialStage = 2;
-    } else if (trialStage === 2) {
+    } else if (trialStage === 2 && (choiceId === '#trialCharacter')) {
         generateDot(true);
         $("#dotTrial").css("display", "block");
         trialStage = 3;
-        trial.push(choice);
     }
-    else if (trialStage === 3) {
-        trialStage = 4;
+    else if (trialStage === 3 && (choiceId === '#dotTrial')) {
         $("#trialCharacter").css("display", "none");
         $("#dotTrial").css("display", "none");
         $("#colorAssociation").css("display", "flex");
         generateDot(false);
-
+        trialStage = 4;
     }
-    else if (trialStage === 4) {
-        trialStage = 1;
-        $("#trialCharacter").css("display", "none");
+    else if (trialStage === 4 && (choiceId === '#color-one' || choiceId === '#color-two')) {
+        var choiceElement = $(choiceId);
+        var answer = feedback("#color-one", "#color-two", true);
+
+        // check if the chosen element id matches the correct answer element id
+        if (answer.attr("id") === choiceElement.attr("id")) {
+            // for now just storing if color picked was the correct ==> true
+            run[currentRun].blocks[currentBlock].trials[currentTrial].color = true;
+        } else {
+            // if color picked was incorrect ==> false
+            run[currentRun].blocks[currentBlock].trials[currentTrial].color = false;
+        }
+
+        trialStage = 5;
+        run[currentRun].blocks[currentBlock].trials.push(trialSchema);
+        currentTrial++;
+    }
+    else if (trialStage === 5) {
         $("#colorAssociation").css("display", "none");
         $("#dotTrial").css("display", "block");
-        trial.push(choice);
+        feedback("#color-one", "#color-two", false);
+        trialStage = 1;
     }
-}
 
+}
 
 /**
  * The generateDot function is responsible for the dot generation in the html canvas during the trial
  * @param rightSide: A boolean to determine if the dot should be generated on the left side or right side
  */
-
 function generateDot(rightSide) {
     var canvas = $("canvas")[0];
     var height = canvas.height;
@@ -218,9 +251,11 @@ function feedback(colorOne, colorTwo, display) {
     }
     else if (topicChoice > 1) {
         $(colorOne).css("border", "0.3em solid #00ff00");
+        return $(colorOne);
     }
     else {
         $(colorTwo).css("border", "0.3em solid #00ff00");
+        return $(colorTwo);
     }
 
 }
@@ -239,10 +274,6 @@ function save() {
     })
 
 }
-
-
-
-
 
 function submitRun() {
     var data = {session:JSON.stringify(run)};

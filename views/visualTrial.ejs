@@ -36,14 +36,14 @@
 </div>
 
 
-<div class="row" id="dotTrial">
-    <div class="col-md-12" ontouchstart="touchOption(null)" id="canvasContainer">
+<div class="row" id="dotTrial" ontouchstart="touchOption('#dotTrial')">
+    <div class="col-md-12" id="canvasContainer">
         <canvas id="dotCanvas">Your Browser does not Support Canvas Elements</canvas>
     </div>
 </div>
 
 
-<div class="row text-center" id="trialCharacter">
+<div class="row text-center" id="trialCharacter" ontouchstart="touchOption('#trialCharacter')">
         <%- include partials/trial/characterPartial.ejs%>
 </div>
 
@@ -53,7 +53,7 @@
         <fieldset class="form-group">
             <div class="form-check">
                 <label class="form-check-label">
-                    <span class="dot" id="color-one"></span>
+                    <div class="dot" id="color-one" ontouchstart="touchOption('#color-one')"></div>
                     <!--<button class="color-choice" name="optionsRadios" id="colorOptionOne" value="option1"-->
                             <!--ontouchstart="touchOption(this.id)">-->
 
@@ -62,7 +62,7 @@
             </div>
             <div class="form-check">
                 <label class="form-check-label">
-                    <span class="dot" id="color-two"></span>
+                    <div class="dot" id="color-two" ontouchstart="touchOption('#color-two')"></div>
                     <!--<button class="color-choice" name="optionsRadios" id="colorOptionTwo" value="option2"-->
                             <!--ontouchstart="toggleRun()">-->
 
