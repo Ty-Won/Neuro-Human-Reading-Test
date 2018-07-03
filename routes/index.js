@@ -14,7 +14,7 @@ router.use(bodyParser.urlencoded({extended: false}));
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-    res.render('index', {title: 'Express'});
+    res.render('index', {title: 'Neuro Human Reading Trial'});
 });
 
 /**
@@ -31,13 +31,21 @@ router.post('/signIn', function (req, res) {
             bcrypt.compare(req.body.password, User.password,function(err,match){
                 if(err){
                     var response={
-                        status:401
+                        status:500
                     };
-                    console.log("Password Incorrect: "+err);
+                    console.log("Error with bcrypt comparison");
                     res.end(JSON.stringify(response));
 
                 }else if(match){
+                    console.log("Successful Sign-In");
                     res.redirect("/trial/" + User.id);
+                }
+                else{
+                    var response={
+                        status:401
+                    };
+                    res.end(JSON.stringify(response));
+                    console.log("Password Incorrect: "+err);
                 }
             });
 

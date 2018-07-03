@@ -1,61 +1,83 @@
 
 <div id="sign-up-modal">
+    <div class="account-wall">
+        <div class="modal-header">
+            <h5 class="modal-title" id="sign-up-modal-title">Information</h5>
+            <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span
+                        aria-hidden="true">x</span>
+            </button>
+        </div>
+        <!--<i class="fas fa-user-circle profile-img fa-5x"></i>-->
 
-    <div class="row">
-        <div class="col">
-            <div class="account-wall">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="sign-up-modal-title">Information</h5>
-                    <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">x</span>
-                    </button>
+
+        <form action="/signUp" method="post">
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label class="form-label" for="first-name">First Name</label>
+                        <input class="signup-form form-control" id="sign-up-first-name" name="firstName"
+                               placeholder="First Name"
+                               type="text" required autofocus>
+                    </div>
+                    <div class="form-group col">
+                        <label class="form-label" for="last-name">Last Name</label>
+                        <input class="signup-form form-control" id="sign-up-last-name" name="lastName"
+                               placeholder="Last Name"
+                               type="text" required>
+                    </div>
                 </div>
-                <!--<i class="fas fa-user-circle profile-img fa-5x"></i>-->
 
+                <div class="form-group">
+                    <label class="form-label" for="Email">Email</label>
+                    <input class="signup-form form-control" id="sign-up-email" name="email" placeholder="Email"
+                           pattern='/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/'
+                           type="email" required>
+                </div>
 
+                <div class="form-group">
+                    <label class="form-label" for="bday">Birthdate</label>
+                    <input class="date-picker signup-form form-control" id="date-picker-2" name="birthdate"
+                           placeholder="Birth Date"
+                           type="date" required><br>
+                </div>
 
-                    <form action="/signUp" method="post">
-                        <div class="modal-body">
-                            <br>
-                            <input class="signup-form form-control" id="sign-up-first-name" name="firstName" placeholder="First Name"
-                                    type="text" required autofocus>
-                            <br>
-                            <input class="signup-form form-control" id="sign-up-last-name" name="lastName" placeholder="Last Name"
-                                    type="text" required><br>
-                            <br>
-                            <input class="signup-form form-control" id="sign-up-email" name="email" placeholder="Email"
-                                   pattern='/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/'
-                                   type="email" required>
-                            <label for="bday"></label>
-                            <input class="date-picker signup-form form-control" id="date-picker-2" name="birthdate" placeholder="Birth Date"
-                                   type="date" required><br>
-                            <input class="signup-form form-control" id="sign-up-pass" name="password" placeholder="Password"
-                                   type="password" pattern="^(?=.*\d).{5,14}$" onkeyup = 'check_pass();'>
-                            <input class="signup-form form-control" id="sign-up-pass-verify" name="password-verification"
-                                   placeholder="Confirm Password" onkeyup = 'check_pass();'
-                                   type="password" required><br>
-							<span id='pass-message'></span><br>
+                <div class="form-group">
+                    <label class="form-label" for="password">Password (5-14 characters with a number)</label>
+                    <input class="signup-form form-control" id="sign-up-pass" name="password" placeholder="Password"
+                           type="password" pattern="^(?=.*\d).{5,14}$" data-toggle="tooltip" data-placement="top"
+                           title="Password should include a number and be between 5-14" onkeyup = 'check_pass();' required>
+                </div>
 
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-lg neuro-btn btn-block" type="submit" id = "submit" disabled>
-                                Sign Up</button>
-                        </div>
-                    </form>
-		
-		<script>
-			function check_pass() { 
-				if (document.getElementById('sign-up-pass').value ==
-					document.getElementById('sign-up-pass-verify').value) {
-					document.getElementById('submit').disabled = false;
-					document.getElementById('pass-message').style.color = 'green';
-					document.getElementById('pass-message').innerHTML = 'Passwords Match';
-				} else {
-					document.getElementById('submit').disabled = true;
-					document.getElementById('pass-message').style.color = 'red';
-					document.getElementById('pass-message').innerHTML = 'Passwords Do Not Match'
-				}
-			}	
-		</script>
+                <div class="form-group">
+                    <label class="form-label" for="verif-pass">Verify Password</label>
+                    <input class="signup-form form-control" id="sign-up-pass-verify" name="password-verification"
+                           placeholder="Confirm Password"
+                           type="password" onkeyup = 'check_pass();' required><br>
+                    <span id='pass-message'></span><br>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="submit" class="btn btn-lg neuro-btn btn-block" type="submit">
+                    Sign Up
+                </button>
+            </div>
+
+        </form>
+
+        <script>
+            function check_pass() {
+                if (document.getElementById('sign-up-pass').value ==
+                    document.getElementById('sign-up-pass-verify').value) {
+                    document.getElementById('submit').disabled = false;
+                    document.getElementById('pass-message').style.color = 'green';
+                    document.getElementById('pass-message').innerHTML = 'Passwords Match';
+                } else {
+                    document.getElementById('submit').disabled = true;
+                    document.getElementById('pass-message').style.color = 'red';
+                    document.getElementById('pass-message').innerHTML = 'Passwords Do Not Match'
+                }
+            }
+        </script>
 
 
 
