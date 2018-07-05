@@ -20,6 +20,11 @@ html, body {
     box-shadow: 6px 6px 21px;
 }
 
+#error-msg{
+    color:red;
+    display: none;
+}
+
 #modal-loading-container {
     display: none;
 }
@@ -103,6 +108,5 @@ html, body {
     -webkit-border-radius: 50%;
     border-radius: 50%;
 }
-
 
 
