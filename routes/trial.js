@@ -13,7 +13,7 @@ router.use(bodyParser.urlencoded({extended:true}));
 router.get('/:id',function(req,res){
     User.findById(req.params.id,function(err, userFound){
         if(err){
-            console.log("An error occured while redirecting after signing in: "+err);
+            console.log("An error occurred while redirecting after signing in: "+err);
         }
         else if(userFound){
             res.render('visualTrial',{User:userFound.firstName,Trial:userFound.session,runSelection:JSON.parse(userFound.session).length-1});

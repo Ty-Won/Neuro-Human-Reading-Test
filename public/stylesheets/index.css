@@ -1,94 +1,112 @@
-html, body {margin: 0; height: 100%; overflow: hidden}
-.jumbotron{
-  height: 100vh;
-  background: url("../images/mcgill.jpg");
-  display: none;
+html, body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden
 }
 
-.neuro-btn{
-  background-color: #4794cc;
-  color: white !important;
+.jumbotron {
+    height: 100vh;
+    background: url("../images/mcgill.jpg");
+    display: none;
+}
+
+.neuro-btn {
+    background-color: #4794cc;
+    color: white !important;
     margin-top: 0.2em;
 }
 
-.card{
-  box-shadow:6px 6px 21px;
+.card {
+    box-shadow: 6px 6px 21px;
 }
 
-#modal-loading-container{
-  display: none;
+#error-msg{
+    color:red;
+    display: none;
 }
 
-
-.signup-form{
-  display: inline;
+#modal-loading-container {
+    display: none;
 }
 
-.form-signin
-{
-  max-width: 330px;
-  padding: 15px;
-  margin: 0 auto;
-}
-.form-signin .form-signin-heading, .form-signin .checkbox
-{
-  margin-bottom: 10px;
-}
-.form-signin .checkbox
-{
-  font-weight: normal;
-}
-.form-signin .form-control
-{
-  position: relative;
-  font-size: 16px;
-  height: auto;
-  padding: 10px;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-.form-signin .form-control:focus
-{
-  z-index: 2;
-}
-.form-signin input[type="text"]
-{
-  margin-bottom: -1px;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-.form-signin input[type="password"]
-{
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
-.account-wall
-{
-  background-color: #f7f7f7;
-  -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-  -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-}
-.login-title
-{
-  color: #555;
-  font-size: 18px;
-  font-weight: 400;
-  display: block;
-}
-.profile-img
-{
-  color:lightgray;
-  width: 96px;
-  height: 96px;
-  margin: 0 auto 10px;
-  display: block;
-  -moz-border-radius: 50%;
-  -webkit-border-radius: 50%;
-  border-radius: 50%;
+.signup-form {
+    display: inline;
+    width: 90%;
 }
 
+.form-label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: bold;
+    line-height: 1.5;
+    color: #495057;
+    background-clip: padding-box;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-signin {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+.form-signin .form-signin-heading, .form-signin .checkbox {
+    margin-bottom: 10px;
+}
+
+.form-signin .checkbox {
+    font-weight: normal;
+}
+
+.form-signin .form-control {
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+
+.form-signin input[type="text"] {
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.account-wall {
+    background-color: #f7f7f7;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.login-title {
+    color: #555;
+    font-size: 18px;
+    font-weight: 400;
+    display: block;
+}
+
+.profile-img {
+    color: lightgray;
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 10px;
+    display: block;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
 
 

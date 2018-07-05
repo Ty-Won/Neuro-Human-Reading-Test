@@ -1,27 +1,26 @@
-
-
-
 <div id="sign-in-modal">
 
     <div class="row">
         <div class="col">
-            <div class="account-wall">
+            <div class="account-wall" style="text-align: center;">
                 <div class="modal-header">
                     <h5 class="modal-title" id="sign-in-modal-title">Sign In</h5>
                     <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span
                                 aria-hidden="true">&times;</span></button>
                 </div>
                 <i class="fas fa-user-circle profile-img fa-5x"></i>
-                <form class="form-signin" action="/signIn" method="post">
+                <form class="form-signin" id="sign-in-form">
 
-
-                    <input class="signin-form form-control" id="email-address" name="email" placeholder="Email"
-                           type="input" required autofocus>
-                    <input class="signin-form form-control" id="sign-in-pass" name="password" placeholder="Password"
-                           type="password" required>
-
-                    <button class="btn btn-lg btn-block" type="submit">
-                        Sign in</button>
+                    <p id='error-msg' data-attempted="false" style='color:red'>Incorrect Password or Email</p>
+                    <div class="form-group">
+                        <input class="signin-form form-control" id="email-address" name="email" placeholder="Email"
+                               type="input" required autofocus>
+                        <input class="signin-form form-control" id="sign-in-pass" name="password" placeholder="Password"
+                               type="password" required>
+                    </div>
+                    <button class="btn btn-lg btn-block" type="button" onclick="signIn()">
+                        Sign in
+                    </button>
                 </form>
             </div>
 
