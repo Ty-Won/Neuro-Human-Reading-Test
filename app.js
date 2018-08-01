@@ -25,6 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/bootstrap', express.static(path.join(__dirname,'node_modules/bootstrap/dist')));
 app.use('/jquery', express.static(path.join(__dirname,'node_modules/jquery/dist')));
 app.use('/font-awesome', express.static(path.join(__dirname,'node_modules/@fortawesome/fontawesome-free')));
+app.use('/jspsych', express.static(path.join(__dirname,'jspsych')));
 
 //Setting up the routes to redirect between pages
 var indexRouter = require('./routes/index');
@@ -37,7 +38,7 @@ app.use('/admin', adminRouter);
 
 //DB connection
 //mlab connecton is mongodb://<dbuser>:<dbpassword>@ds117701.mlab.com:17701/neuro-trials
-mongoose.connect("mongodb://localhost:27017/tyroneTestDbs");
+mongoose.connect("mongodb://<dbuser>:<dbpassword>@ds117701.mlab.com:17701/neuro-trials");
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error'));

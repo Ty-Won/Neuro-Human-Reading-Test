@@ -14,6 +14,14 @@ router.get('/', function (req, res, next) {
     res.render('index', {title: 'Neuro Human Reading Trial'});
 });
 
+/*TESTING*/
+
+/* GET home page. */
+router.get('/jspsychDemo', function (req, res, next) {
+    res.render('jspsychDemo', {title: 'Neuro Human Reading Trial'});
+});
+
+
 /**
  * Handles post requests for sign in from the index page and uses the bcrypt module for
  * password encryption
@@ -23,19 +31,6 @@ router.post('/signIn', function (req, res) {
     var response;
     var data = new User(req.body);
     var queryResult = User.findOne({email: new RegExp('^' + data.email + '$')}).exec();
-
-    // , function (err, User) {
-    //     if (err) {
-    //         console.log("Error Signing In: " + err);
-    //         response = {
-    //             status: 404
-    //         };
-    //         res.writeHead(response.status);
-    //         res.end(JSON.stringify(response));
-    //
-    //     }
-    //     else if (User) {        }
-    // });
 
     queryResult.then(function (userFound) {
         if (!userFound) {
