@@ -14,13 +14,6 @@ router.get('/', function (req, res, next) {
     res.render('index', {title: 'Neuro Human Reading Trial'});
 });
 
-/*TESTING*/
-
-/* GET home page. */
-router.get('/jspsychDemo', function (req, res, next) {
-    res.render('jspsychDemo', {title: 'Neuro Human Reading Trial'});
-});
-
 
 /**
  * Handles post requests for sign in from the index page and uses the bcrypt module for

@@ -16,7 +16,8 @@ router.get('/:id',function(req,res){
             console.log("An error occurred while redirecting after signing in: "+err);
         }
         else if(userFound){
-            res.render('visualTrial',{User:userFound.firstName,Trial:userFound.session,runSelection:JSON.parse(userFound.session).length-1});
+            // res.render('visualTrial',{User:userFound.firstName,Trial:userFound.session,runSelection:JSON.parse(userFound.session).length-1});
+            res.render('jspsychDemo',{User:userFound.firstName});
         }
         else{
             console.log("Unsuccessful Sign-in");
@@ -30,26 +31,6 @@ router.get('/:id',function(req,res){
  * Receive an ajax request to save the current trial state under the current userID profile
  */
 
-// router.put('/:id/save',function(req,res){
-//     User.findById(req.params.id,function(err,userFound){
-//         if(err){
-//             console.log("An error occurred while saving the current trial session"+err);
-//         }
-//         else if(userFound){
-//             userFound.session=req.body;
-//             userFound.save(function(err,updatedUser){
-//                 if(err){
-//                     console.log("An error occured while saving the new run data to the current user session"+err);
-//                 }
-//                 else if(updatedUser){
-//                     console.log("Trial has been Saved");
-//                 }
-//             });
-//
-//         }
-//     })
-//
-// });
 
 router.put('/:id/save',function(req,res){
     User.findByIdAndUpdate({_id:req.params.id},req.body,function(err,userUpdated){
