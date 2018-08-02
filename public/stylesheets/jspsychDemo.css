@@ -3,3 +3,27 @@
     width: 40em;
     float: right;
 }
+
+
+.blue-stimuli{
+    margin: 1em;
+    max-width: 100%;
+    background-color: blue;
+    border-radius: 50%;
+    width: 4em;
+    height: 4em;
+}
+
+.orange-stimuli{
+    margin: 1em;
+    max-width: 100%;
+    background-color: orange;
+    border-radius: 50%;
+    width: 4em;
+    height: 4em;
+
+}
+
+.chinese-char{
+    font-size:4em;
+}
