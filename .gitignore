@@ -3,7 +3,7 @@ node_modules
 .idea
 todoList
 app_db.js
-
+data
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml

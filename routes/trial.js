@@ -17,7 +17,7 @@ router.get('/:id',function(req,res){
         }
         else if(userFound){
             // res.render('visualTrial',{User:userFound.firstName,Trial:userFound.session,runSelection:JSON.parse(userFound.session).length-1});
-            res.render('jspsychDemo',{User:userFound.firstName});
+            res.render('jspsychDemo',{User:userFound.firstName,Session:userFound.session});
         }
         else{
             console.log("Unsuccessful Sign-in");

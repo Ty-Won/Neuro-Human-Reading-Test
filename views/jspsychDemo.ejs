@@ -10,22 +10,14 @@
     <script src="/jspsych/plugins/jspsych-RDK.js"></script>
     <script src="/jspsych/plugins/jspsych-image-keyboard-response.js"></script>
     <script src="/jspsych/plugins/jspsych-categorize-html.js"></script>
-    <script src="/javascripts/jspsych_demo.js"></script>
     <link href="/jspsych/css/jspsych.css" rel="stylesheet" type="text/css">
     <link href="/stylesheets/jspsychDemo.css" rel="stylesheet" type="text/css">
+    <script>var run= <%=JSON.parse(Session).length%> </script>
+    <script src="/javascripts/jspsych_demo.js"></script>
 </head>
 <body style="overflow-x:hidden; overflow-y:hidden">
 
-<!--<div class="row" id="dotTrial" ontouchstart="touchOption('#dotTrial')">-->
-    <!--<div class="col-md-12" id="canvasContainer">-->
-        <!--<canvas id="dotCanvas">Your Browser does not Support Canvas Elements</canvas>-->
-    <!--</div>-->
-<!--</div>-->
-<!--<p>&#21488;&#21271;&#x4E00;&#19968;</p>-->
 
-<!--<%for(var i=0;i<24;i++){%>-->
-    <!--<span>&#<%= 13312+i*100%></span>-->
-<!--<%}%>-->
 
 <div id="neuro-trials" style="width: 100%;height: 40em"></div>
 

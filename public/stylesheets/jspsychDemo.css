@@ -1,4 +1,4 @@
-#color-container{
+.color-container{
     height: 10em;
     width: 40em;
     float: right;
@@ -23,7 +23,9 @@
     height: 4em;
 
 }
-
+.green-highlight{
+    border: 0.25em solid green;
+}
 .chinese-char{
     font-size:4em;
 }
