@@ -25,6 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/bootstrap', express.static(path.join(__dirname,'node_modules/bootstrap/dist')));
 app.use('/jquery', express.static(path.join(__dirname,'node_modules/jquery/dist')));
 app.use('/font-awesome', express.static(path.join(__dirname,'node_modules/@fortawesome/fontawesome-free')));
+app.use('/jspsych', express.static(path.join(__dirname,'jspsych')));
 
 //Setting up the routes to redirect between pages
 var indexRouter = require('./routes/index');

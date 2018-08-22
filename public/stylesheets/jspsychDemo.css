@@ -1,0 +1,36 @@
+.color-container{
+    height: 10em;
+    width: 40em;
+    float: right;
+}
+
+
+.blue-stimuli{
+    margin: 1em;
+    max-width: 100%;
+    background-color: blue;
+    border-radius: 50%;
+    width: 4em;
+    height: 4em;
+}
+
+.orange-stimuli{
+    margin: 1em;
+    max-width: 100%;
+    background-color: orange;
+    border-radius: 50%;
+    width: 4em;
+    height: 4em;
+
+}
+.green-highlight{
+    border: 0.25em solid green;
+}
+.chinese-char{
+    font-size:4em;
+}
+
+.navbar{
+    outline: 1px solid #ababab;
+    padding: 1.5em;
+}
