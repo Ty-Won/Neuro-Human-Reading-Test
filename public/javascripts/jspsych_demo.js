@@ -69,7 +69,7 @@ $(document).ready(function () {
         incorrect_text:" ",
         correct_text:" ",
         timeout_message:" ",
-        post_trial_gap:8000,
+        post_trial_gap:3000,
         on_start: function(trial){
             color_order=trial.stimulus;
         },
@@ -89,7 +89,8 @@ $(document).ready(function () {
         timeline: [dot_trial, char_trial, dot_trial, color_trial],
         timeline_variables: color_stimuli,
         randomize_order: true,
-        repetitions: blocks * numTrials
+        // repetitions: blocks * numTrials
+        repetitions:1
     };
 
     timeline.push(block_experiment);
@@ -264,11 +265,12 @@ function displayAnswer(correctAnswer){
 //save function
 function save() {
     // submitRun(jsPsych.data);
-    run = { "session": JSON.parse(jsPsych.data.get().json()) };
+    run = {"session":jsPsych.data.get().json()};
 
     $.ajax({
         method: "PUT",
         url: window.location.pathname + "/save",
+        dataType:'JSON',
         data: run,
         success: function (response) {
             console.log(response.success);
@@ -279,7 +281,7 @@ function save() {
 }
 
 function submitRun(run) {
-
+    run = JSON.stringify(jsPsych.data.get().json());
     $.ajax({
         method: "PUT",
         url: window.location.pathname + "/submit",

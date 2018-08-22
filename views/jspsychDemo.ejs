@@ -12,7 +12,7 @@
     <script src="/jspsych/plugins/jspsych-categorize-html.js"></script>
     <link href="/jspsych/css/jspsych.css" rel="stylesheet" type="text/css">
     <link href="/stylesheets/jspsychDemo.css" rel="stylesheet" type="text/css">
-    <script>var run= <%=JSON.parse(Session).length%> </script>
+    <script> var run=1</script>
     <script src="/javascripts/jspsych_demo.js"></script>
 </head>
 <body style="overflow-x:hidden; overflow-y:hidden">
@@ -24,7 +24,6 @@
 <nav class="navbar fixed-bottom navbar-light bg-light justify-content-between">
     <a class="navbar-brand"> Welcome <%= User %></a>
     <div class="form-inline">
-        <button class="btn navbar-btn btn-outline-success" onclick="save()">Save</button>
     </div>
 </nav>
 </body>

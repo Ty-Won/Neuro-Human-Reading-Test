@@ -21,10 +21,7 @@ var userSchema = new Schema({
     "email": {type: String, required: true, unique: true},
     "password": {type: String, required: true},
     "birthdate": {type: Date, required: true},
-    "session": {
-        type: String, default:'[{"blocks":[{"trials":[{"color":null}]}]}]'
-    }
-
+    "session": []
 });
 
 var User = mongoose.model("user_profiles", userSchema);
