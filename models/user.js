@@ -1,19 +1,6 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
-// var trials = new Schema({
-//     "color": {type: String, default: "here"}
-// }, {_id: false});
-//
-// var blocks = new Schema({
-//
-//     "trials": [trials]
-//
-// }, {_id: false});
-//
-// var run = new Schema({
-//     "blocks": [blocks]
-// }, {_id: false});
 
 var userSchema = new Schema({
     "firstName": {type: String, required: true},
@@ -23,6 +10,14 @@ var userSchema = new Schema({
     "birthdate": {type: Date, required: true},
     "session": []
 });
+
+// "block_1":{
+//     "trial_1":{
+//         "condition":{type:Number},
+//
+//     }
+// }
+
 
 var User = mongoose.model("user_profiles", userSchema);
 

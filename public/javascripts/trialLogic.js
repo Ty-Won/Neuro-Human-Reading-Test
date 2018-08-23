@@ -1,9 +1,9 @@
 var trialStage = 1;
 var currentRun = selectedRun;
-var currentBlock = run[currentRun].blocks.length - 1;
-var currentTrial = run[currentRun].blocks[currentBlock].trials.length - 1;
+var currentBlock = 1;
+var currentTrial = 1;
 var numberOfBlocks = 3;
-var numberTrials = 5;
+var numberTrials = 2;
 var characterVariation;
 
 
@@ -55,7 +55,7 @@ function nextTrial(key) {
 
     //If the currentTrial has just surpassed the number of trials per block (-1 is due to index starting at 0),
     // create a new block and assign a new character display variation to it
-    if (currentTrial > numberTrials-1) {
+    if (currentTrial > numberTrials - 1) {
         currentTrial = 0;
         run[selectedRun].blocks.push(blockSchema);
         currentBlock++;
@@ -64,7 +64,7 @@ function nextTrial(key) {
 
     //If the number of blocks tested per run is reached, submit the run
     if (currentBlock > numberOfBlocks - 1) {
-        var newRun={"blocks":[{"trials":[{"color":null}]}]};
+        var newRun = {"blocks": [{"trials": [{"color": null}]}]};
         run.push(newRun);
         submitRun();
     }
@@ -116,7 +116,7 @@ function touchOption(choiceId) {
 
     //If the currentTrial has just surpassed the number of trials per block (-1 is due to index starting at 0),
     // create a new block and assign a new character display variation to it
-    if (currentTrial > numberTrials-1) {
+    if (currentTrial > numberTrials - 1) {
         currentTrial = 0;
         run[selectedRun].blocks.push(blockSchema);
         currentBlock++;
@@ -125,7 +125,7 @@ function touchOption(choiceId) {
 
     //If the number of blocks tested per run is reached, submit the run
     if (currentBlock > numberOfBlocks - 1) {
-        var newRun={"blocks":[{"trials":[{"color":null}]}]};
+        var newRun = {"blocks": [{"trials": [{"color": null}]}]};
         run.push(newRun);
         submitRun();
     }
@@ -219,16 +219,25 @@ function charactersToDisplay() {
  * @param numChar: The number of characters to present in the current block
  */
 function generateCharacter(numChar) {
-    var charElement = $(".character-container")[0];
-    var character;
-    $("#trialCharacter").html("");
-    for (var char = 0; char <= numChar; char++) {
-        character = charactersToDisplay();
-        $(charElement).attr("id", "charID" + char);
-        $("#trialCharacter").append($(charElement).clone());
-        $("#charID" + char + ">img").attr("src", "../images/svg/" + character + ".svg")
+    // var charElement = $(".character-container")[0];
+    // var character;
+    // $("#trialCharacter").html("");
+    // for (var char = 0; char <= numChar; char++) {
+    //     character = charactersToDisplay();
+    //     $(charElement).attr("id", "charID" + char);
+    //     $("#trialCharacter").append($(charElement).clone());
+    //     $("#charID" + char + ">img").attr("src", "../images/svg/" + character + ".svg")
+    //
+    // }
 
+    var stimulus = "";
+    $(".character-container").html("");
+    var chinese_char = 13312;
+    for (var i = 0; i < numChar; i++) {
+        chinese_char += charactersToDisplay() * 100;
+        stimulus += '<span class="chinese-char">&#' + chinese_char + '</span>';
     }
+    $(".character-container").append(stimulus);
 
 }
 
@@ -261,12 +270,14 @@ function feedback(colorOne, colorTwo, display) {
 }
 
 function save() {
-    var data = {session:JSON.stringify(run)};
+
+    var data = {"blocks": [{"trials": [{"color": null}]}]};
     //the data run is defined within the visualTrial.ejs template under the script tag
     $.ajax({
         method: "PUT",
         url: window.location.pathname + "/save",
-        data: data,
+        contentType: "application/json",
+        data: JSON.stringify(data),
         success: function (response) {
             console.log(response.success);
             alert("Successfully saved");
@@ -276,7 +287,7 @@ function save() {
 }
 
 function submitRun() {
-    var data = {session:JSON.stringify(run)};
+    var data = {session: JSON.stringify(run)};
     //the data run is defined within the visualTrial.ejs template under the script tag
     $.ajax({
         method: "PUT",
@@ -284,7 +295,7 @@ function submitRun() {
         data: data,
         success: function (response) {
             alert(response);
-            window.location.href="/";
+            window.location.href = "/";
         }
     });
 }

@@ -13,15 +13,17 @@
 <body>
 
 <script>
-    var run = <%- Trial %>;
-    var selectedRun = <%= runSelection %>;
+    var run = <%= Trial %>;
+    var selectedRun = Object.keys(run).length-1;
+
+
 </script>
 
 <div class="modal fade" id="run-modal" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Run <%=runSelection+1%></h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Run <%= Object.keys(Trial).length-1%></h5>
             </div>
             <div class="modal-body">
                 To proceed through the trial, use the right arrow key to navigate. Once a colored dot appears, use the
@@ -44,7 +46,7 @@
 
 
 <div class="row text-center" id="trialCharacter" ontouchstart="touchOption('#trialCharacter')">
-        <%- include partials/trial/characterPartial.ejs%>
+    <div class="card col character-container" ontouchstart="touchOption(this.id)"></div>
 </div>
 
 
@@ -56,7 +58,6 @@
                     <div class="dot" id="color-one" ontouchstart="touchOption('#color-one')"></div>
                     <!--<button class="color-choice" name="optionsRadios" id="colorOptionOne" value="option1"-->
                             <!--ontouchstart="touchOption(this.id)">-->
-
                     <!--</button>-->
                 </label>
             </div>
@@ -65,13 +66,11 @@
                     <div class="dot" id="color-two" ontouchstart="touchOption('#color-two')"></div>
                     <!--<button class="color-choice" name="optionsRadios" id="colorOptionTwo" value="option2"-->
                             <!--ontouchstart="toggleRun()">-->
-
                     <!--</button>-->
                 </label>
             </div>
         </fieldset>
     </div>
-
 </div>
 
 

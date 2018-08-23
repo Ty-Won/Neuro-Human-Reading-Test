@@ -5,10 +5,6 @@ html, body {margin: 0; height: 100%; overflow: hidden}
     transition:1s;
 }
 
-.card:hover{
-    box-shadow: 5px 5px 20px 8px;
-    top:-0.5em;
-}
 
 .dot {
     height: 2em;
@@ -51,6 +47,8 @@ canvas{
 
 .character-container{
     max-height: 70%;
+    display:inline;
+    font-size:4em;
 }
 
 #colorAssociation{
