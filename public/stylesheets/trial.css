@@ -23,6 +23,11 @@ html, body {margin: 0; height: 100%; overflow: hidden}
 .modal-header{
     margin:auto;
 }
+
+.modal-dialog{
+    max-width: 70em;
+}
+
 .modal-footer{
     justify-content: center;
 }
@@ -49,6 +54,7 @@ canvas{
     max-height: 70%;
     display:inline;
     font-size:4em;
+    border:none;
 }
 
 #colorAssociation{

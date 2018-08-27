@@ -11,12 +11,6 @@ var userSchema = new Schema({
     "session": []
 });
 
-// "block_1":{
-//     "trial_1":{
-//         "condition":{type:Number},
-//
-//     }
-// }
 
 
 var User = mongoose.model("user_profiles", userSchema);

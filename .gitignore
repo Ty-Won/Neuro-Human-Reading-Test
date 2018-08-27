@@ -1,5 +1,5 @@
 ## Ignore node modules and jetbrain idea files
-node_modules
+node_modules/
 .idea
 todoList
 app_db.js

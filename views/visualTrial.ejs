@@ -14,7 +14,7 @@
 
 <script>
     var run = <%= Trial %>;
-    var selectedRun = Object.keys(run).length-1;
+    var selectedRun = run.length+1;
 
 
 </script>
@@ -23,12 +23,9 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Run <%= Object.keys(Trial).length-1%></h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Run <%= Trial.length+1 %></h5>
             </div>
-            <div class="modal-body">
-                To proceed through the trial, use the right arrow key to navigate. Once a colored dot appears, use the
-                up and down arrow keys to select the color you associate yourself with and then continue to proceed with
-                the right arrow key.
+            <div id="model-message" class="modal-body">
             </div>
             <div class="modal-footer">
                 <button type="button" id="begin-trial" class="btn btn-primary" onclick="">Begin</button>
@@ -77,10 +74,11 @@
 <nav class="navbar fixed-bottom navbar-light bg-light justify-content-between">
     <a class="navbar-brand"> Welcome <%= User %></a>
     <div class="form-inline">
-        <button class="btn navbar-btn btn-outline-success" onclick="save()">Save</button>
+        <button class="btn navbar-btn btn-outline-success" onclick="save(dataRun)">Save</button>
     </div>
 </nav>
-
+<script src="/mathjs/dist/math.min.js"></script>
+<script src="/discrete-sampling/dist/discrete.min.js"></script>
 <script src="/javascripts/trialLogic.js"></script>
 
 </body>
