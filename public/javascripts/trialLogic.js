@@ -1,11 +1,13 @@
 var trialStage = 1;
-var currentRun = 1;
+var currentRun = parseInt($("#exampleModalLongTitle").attr("data-run"));
 var currentBlock = 1;
 var currentTrial = 1;
 var numberOfBlocks = 1;
 var numberTrials = 1;
 var characterVariation;
-
+var topicChoice;
+var conditionChoice;
+var characterIdList;
 var runData = {
     "blocks": []
 };
@@ -21,7 +23,8 @@ var trial = {
     "Topic": null,
     "Stim_ids": [],
     "reading_time": null,
-    "reaction_time": null
+    "reaction_time": null,
+    "key":null
 }
 
 
@@ -46,7 +49,7 @@ $(document).ready(function () {
 
 function welcomeMsg(run) {
     var welcome_msg;
-
+    var isDone=false;
     switch (run) {
         case 1:
             welcome_msg = 'Welcome to the first day of your experimental training. In this experiment, we are trying to understand how people learn artificial languages. We specifically created an artificial language that you will learn here for 5 days. This language is composed of different symbols. Each of the symbols is associated with a specific “topic”: “red” or “blue”. Your task today is to determine the topic associated with each symbol.  ' +
@@ -56,6 +59,7 @@ function welcomeMsg(run) {
                 '   After that, a feedback message will appear on the screen indicating whether your choice was correct (“CORRECT”) or wrong (“WRONG”). Note that if you do not make a choice by pressing ↑ or ↓, a green circle will appear around the correct answer.  ' +
                 '     ' +
                 '  When you are ready to start, press →  ';
+                break;
         case 2:
             welcome_msg = 'Welcome to the second day of your experimental training. In this experiment, we are trying to understand how people learn artificial languages. We specifically created an artificial language that you will learn here for 5 days. Yesterday, you learned that this language is composed of different symbols. Each of the symbols is associated with a specific “topic”: “red” or “blue”. Your task today is to review what you learned yesterday by associating each symbol with its corresponding topic.  ' +
                 '     ' +
@@ -64,6 +68,7 @@ function welcomeMsg(run) {
                 '   After that, a feedback message will appear on the screen indicating whether your choice was correct (“CORRECT”) or wrong (“WRONG”). Note that if you do not make a choice by pressing ↑ or ↓, a green circle will appear around the correct answer.  ' +
                 '     ' +
                 '  When you are ready to start, press →.';
+                break;
         case 3:
             welcome_msg = 'Welcome to the third day of your experimental training. In this experiment, we are trying to understand how people learn artificial languages. We specifically created an artificial language that you will learn here for 5 days. This language is composed of different symbols. Each of the symbols is associated with a specific “topic”: “red” or “blue”. You should now have some idea of which symbol is associated with which topic.  ' +
                 '     ' +
@@ -74,6 +79,7 @@ function welcomeMsg(run) {
                 '   After that, a feedback message will appear on the screen indicating whether your choice was correct (“CORRECT”) or wrong (“WRONG”).  ' +
                 '     ' +
                 '  When you are ready to start, press →.';
+                break;
         case 4:
             welcome_msg = 'Welcome to the fourth day of your experimental training. In this experiment, we are trying to understand how people learn artificial languages. We specifically created an artificial language that you will learn here for 5 days. This language is composed of different symbols. Each of the symbols is associated with a specific “topic”: “red” or “blue”. You should now have some idea of which symbol is associated with which topic. You also discovered that symbols may appear in combination, and that each combination is associated with a specific topic.  ' +
                 '     ' +
@@ -84,6 +90,7 @@ function welcomeMsg(run) {
                 '   After that, a feedback message will appear on the screen indicating whether your choice was correct (“CORRECT”) or wrong (“WRONG”).  ' +
                 '     ' +
                 '  When you are ready to start, press →.  ';
+                break;
         case 5:
             welcome_msg = 'Welcome to the fifth and last day of your experimental training. In this experiment, we are trying to understand how people learn artificial languages. We specifically created an artificial language that you will learn here for 5 days. This language is composed of different symbols. Each of the symbols is associated with a specific “topic”: “red” or “blue”. As you discovered, symbols may appear alone or in different combinations. You should now have some idea of which symbol or combination is associated with which topic and  ' +
                 '     ' +
@@ -94,10 +101,22 @@ function welcomeMsg(run) {
                 '   After that, a feedback message will appear on the screen indicating whether your choice was correct (“CORRECT”) or wrong (“WRONG”).  ' +
                 '     ' +
                 '  When you are ready to start, press →.  ';
+                break;
         default:
+            welcome_msg="Welcome! You have successfully finished all the days the visual trial."
+            isDone=true;
 
     }
+
+
     $("#model-message").html("<p>" + welcome_msg + "</p>");
+
+    if(isDone){
+        setTimeout(function(){
+            window.location.href = "/";
+        },3000)
+    }
+
 
 }
 
@@ -145,8 +164,8 @@ function nextTrial(key) {
 
 
     if (trialStage === 1 && key === 39) {
-        var topicChoice = Math.random() * 2;
-        var conditionChoice = Math.floor(Math.random() * 11)
+        topicChoice= Math.random() * 2;
+        conditionChoice = Math.floor(Math.random() * 11)
 
         if (topicChoice > 1) {
             topicChoice = 2;
@@ -155,7 +174,7 @@ function nextTrial(key) {
         else {
             topicChoice = 1;
         }
-        var characterIdList = generateStimulus(topicChoice, conditionChoice);
+        characterIdList = generateStimulus(topicChoice, conditionChoice);
         $("#dotTrial").css("display", "none");
         displayCharacter(characterIdList);
         $("#trialCharacter").css("display", "flex");
@@ -176,7 +195,12 @@ function nextTrial(key) {
         trialStage = 5;
         feedback("#color-one", "#color-two", true);
         runData.blocks[currentBlock - 1].trials.push(trial);
-        runData.blocks[currentBlock - 1].trials[currentTrial - 1].topic = key;
+        runData.blocks[currentBlock - 1].trials[currentTrial - 1].key = key;
+        runData.blocks[currentBlock - 1].trials[currentTrial - 1].Block = currentBlock;
+        runData.blocks[currentBlock - 1].trials[currentTrial - 1].Condition = conditionChoice;
+        runData.blocks[currentBlock - 1].trials[currentTrial - 1].Topic = topicChoice;
+        runData.blocks[currentBlock - 1].trials[currentTrial - 1].Stim_ids = characterIdList;
+        runData.blocks[currentBlock - 1].trials[currentTrial - 1].Trial = currentTrial;
         currentTrial++;
     }
     else if (trialStage === 5) {
@@ -243,6 +267,7 @@ function touchOption(choiceId) {
             // if color picked was incorrect ==> false
             dataRun.blocks[currentBlock - 1].trials[currentTrial - 1].color = false;
         }
+
 
         trialStage = 5;
         run[currentRun].blocks[currentBlock].trials.push(trialSchema);
@@ -315,7 +340,7 @@ function generateDot(rightSide) {
  * It works by randomly choosing characters (via charactersToDisplay) and appending them to the #trialCharacter element
  * @param numChar: The number of characters to present in the current block
  */
-function displayCharacter(charIdxSeq) {
+function displayCharacter(charIdxSeq, x) {
 
     var stimulus = "";
     $(".character-container").html("");
@@ -327,6 +352,7 @@ function displayCharacter(charIdxSeq) {
 
 
     for (var i = 0; i < charIdxSeq.length; i++) {
+        
         stimulus += '<span class="chinese-char">' + collection[charIdxSeq[i]] + '</span>';
     }
     $(".character-container").append(stimulus);
